@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown</title>
+    <style>
+        body {
+            background: #1a1a1a; /* Dark background */
+            font-family: 'Courier New', monospace;
+            color: #00ffcc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            background: url('image2.jpg') no-repeat center center fixed;
+        }
+
+        .countdown-container {
+            padding: 40px;
+            background: #222;
+            border: 2px solid #00ffcc;
+            border-radius: 15px;
+            box-shadow: 0 0 20px #00ffcc, 0 0 60px #00ffaa inset;
+        }
+
+        .countdown-label h1 {
+            font-size: 40px;
+            color: #ff1493; /* Neon pink */
+            margin: 0;
+            animation: pulse 2s infinite;
+        }
+
+        .countdown-timer {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .countdown-timer span {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 2px solid #00ffcc;
+            border-radius: 10px;
+            background: #333;
+            color: #00ffcc;
+            font-size: 30px;
+            font-weight: bold;
+            box-shadow: 0 0 10px #00ffaa, 0 0 30px #00ffcc inset;
+        }
+
+        .countdown-timer span .label {
+            display: block;
+            font-size: 18px;
+            color: #ff1493;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                text-shadow: 0 0 10px #ff1493, 0 0 20px #ff1493, 0 0 40px #ff69b4;
+            }
+            50% {
+                text-shadow: 0 0 20px #ff69b4, 0 0 40px #ff69b4, 0 0 80px #ff69b4;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown-container">
+        <div class="countdown-label">
+            <h1>Until 2026</h1>
+        </div>
+        <div class="countdown-timer" id="countdown">
+        </div>
+    </div>
+    <script>
+        const targetDate = new Date('2026-01-01T00:00:00');
+
+        function updateCountdown() {
+            const currentDate = new Date();
+            const timeDifference = targetDate - currentDate;
+
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerHTML = `
+                <span>${days}<div class="label">Days</div></span>
+                <span>${hours}<div class="label">Hours</div></span>
+                <span>${minutes}<div class="label">Minutes</div></span>
+                <span>${seconds}<div class="label">Seconds</div></span>
+            `;
+
+            setTimeout(updateCountdown, 1000);
+        }
+
+        updateCountdown();
+    </script>
+</body>
+</html>
